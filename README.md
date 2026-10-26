@@ -7,7 +7,7 @@ A React + Vite website based on our Figma prototype.
 Install Node.js 22.12+ (or Node.js 24 LTS), then run:
 
 ```sh
-git clone https://github.com/GamefinderIndustries/UI-UX-Design-Website.git
+git clone https://github.com/Gamefinder-Industries/UI-UX-Design-Website.git
 cd UI-UX-Design-Website
 npm ci
 npm run dev
