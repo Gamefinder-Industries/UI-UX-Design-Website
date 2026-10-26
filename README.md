@@ -1,4 +1,4 @@
-# GameFinder
+# Gamefinder
 
 A React + Vite website based on our Figma prototype.
 
