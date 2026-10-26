@@ -1,39 +1,37 @@
 # Gamefinder
 
-A React + Vite website based on our Figma prototype.
+A website built with HTML, CSS, and JavaScript based on our Figma prototype.
 
 ## Get started
-
-Install Node.js 22.12+ (or Node.js 24 LTS), then run:
 
 ```sh
 git clone https://github.com/Gamefinder-Industries/UI-UX-Design-Website.git
 cd UI-UX-Design-Website
-npm ci
-npm run dev
 ```
 
-Open the local URL printed in the terminal. Changes to source files update the page while the development server runs.
+Open `index.html` in your browser. No Node.js installation, npm dependencies, or build step is required. Save edits and refresh the browser to see them.
+
+For automatic refresh while editing, optionally open the folder in VS Code and use the Live Server extension's **Open with Live Server** command on `index.html`.
 
 ## Project structure
 
 ```text
-index.html          HTML entry point
-package.json        Dependencies and commands
-vite.config.js      Vite and React configuration
-public/             Files served directly, such as a favicon
-src/
-  main.jsx          Starts React and imports shared CSS
-  App.jsx           Main page layout
-  styles.css        Shared styles
-  components/       Reusable React components
-  assets/           Images and icons imported by components
+index.html       Page structure and content
+styles.css       Styling and responsive layout
+script.js        Page interactions, such as filters and buttons
+assets/          Images and icons
+.gitignore       Files excluded from Git
+README.md        Setup and contribution instructions
 ```
 
-Empty folders contain `.gitkeep` files so Git tracks them. Remove those placeholders when adding actual files.
+The assets folder contains a `.gitkeep` placeholder so Git tracks it. Remove the placeholder when adding images or icons.
 
-## Commands
+## Working on the site
 
-- `npm run dev`: Start the development server.
-- `npm run build`: Generate a production build in `dist/`.
-- `npm run preview`: Preview the production build locally after building.
+- Edit `index.html` to change the page content.
+- Edit `styles.css` to change its appearance.
+- Add browser JavaScript to `script.js` for interactions.
+- Store images in `assets/` and use relative paths such as `./assets/game-cover.jpg`.
+- Add separate HTML files when additional pages are needed.
+
+The starter page is a placeholder for the Figma design. This project currently has no backend.
