@@ -37,7 +37,3 @@ Empty folders contain `.gitkeep` files so Git tracks them. Remove those placehol
 - `npm run dev`: Start the development server.
 - `npm run build`: Generate a production build in `dist/`.
 - `npm run preview`: Preview the production build locally after building.
-
-Commit `package-lock.json` when dependencies change. Generated files in `node_modules/` and `dist/` are ignored by Git.
-
-The initial page is a placeholder; the Figma screens have not been implemented yet.
