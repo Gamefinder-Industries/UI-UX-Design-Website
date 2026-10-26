@@ -34,4 +34,4 @@ The assets folder contains a `.gitkeep` placeholder so Git tracks it. Remove the
 - Store images in `assets/` and use relative paths such as `./assets/game-cover.jpg`.
 - Add separate HTML files when additional pages are needed.
 
-The starter page is a placeholder for the Figma design. This project currently has no backend.
+
