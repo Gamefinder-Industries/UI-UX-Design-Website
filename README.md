@@ -1,37 +1,49 @@
 # Gamefinder
 
-A website built with HTML, CSS, and JavaScript based on our Figma prototype.
+A React + Vite website based on our Figma prototype.
 
 ## Get started
+
+Install Node.js 22.12+ or Node.js 24 LTS, then run:
 
 ```sh
 git clone https://github.com/Gamefinder-Industries/UI-UX-Design-Website.git
 cd UI-UX-Design-Website
+npm ci
+npm run dev
 ```
 
-Open `index.html` in your browser. No Node.js installation, npm dependencies, or build step is required. Save edits and refresh the browser to see them.
+If you already cloned the project, pull the latest changes and run `npm ci` before starting it.
 
-For automatic refresh while editing, optionally open the folder in VS Code and use the Live Server extension's **Open with Live Server** command on `index.html`.
+Open the local URL printed in the terminal. Vite updates the page when you save source changes. Use `npm run dev` instead of Live Server or opening `index.html` directly.
 
 ## Project structure
 
 ```text
-index.html       Page structure and content
-styles.css       Styling and responsive layout
-script.js        Page interactions, such as filters and buttons
-assets/          Images and icons
-.gitignore       Files excluded from Git
-README.md        Setup and contribution instructions
+index.html          HTML entry point
+package.json        Dependencies and commands
+vite.config.js      Vite and React configuration
+src/
+  main.jsx          Starts React
+  App.jsx           Main page layout
+  styles.css        Shared styling
+  components/       Reusable React components
+assets/             Images and icons imported by components
+public/             Files served directly, such as a favicon
 ```
 
-The assets folder contains a `.gitkeep` placeholder so Git tracks it. Remove the placeholder when adding images or icons.
+Empty folders contain `.gitkeep` placeholders so Git tracks them. Remove the placeholders when adding files.
+
+## Commands
+
+- `npm run dev`: Start the development server.
+- `npm run build`: Generate a production build in `dist/`.
+- `npm run preview`: Preview the production build after building.
 
 ## Working on the site
 
-- Edit `index.html` to change the page content.
-- Edit `styles.css` to change its appearance.
-- Add browser JavaScript to `script.js` for interactions.
-- Store images in `assets/` and use relative paths such as `./assets/game-cover.jpg`.
-- Add separate HTML files when additional pages are needed.
-
-
+- Edit `src/App.jsx` and add components in `src/components/` for page content.
+- Edit `src/styles.css` for appearance and responsive layouts.
+- Use React state and event handlers for interactions.
+- Import images from `assets/`, or reference files in `public/` using paths from the site root.
+- Commit `package-lock.json` when dependencies change. Generated `node_modules/` and `dist/` files are ignored by Git.
