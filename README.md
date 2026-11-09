@@ -1,10 +1,10 @@
-# Gamefinder
+# GameFinder
 
-A React + Vite website based on our Figma prototype.
+GameFinder is a desktop React prototype. The prototype includes the Home page, reusable game cards, and the game details popup.
 
-## Get started
+## Run it locally
 
-Install Node.js 22.12+ or Node.js 24 LTS, then run:
+Use Node.js 22.12+ or 24 LTS.
 
 ```sh
 git clone https://github.com/Gamefinder-Industries/UI-UX-Design-Website.git
@@ -13,43 +13,33 @@ npm ci
 npm run dev
 ```
 
-If you already cloned the project, pull the latest changes and run `npm ci` before starting it.
+Open the URL Vite prints in a desktop browser. Click a game card to see its details. The heart toggles a saved marker on Home until reload. Steam shows the retailer's current price.
 
-Open the local URL printed in the terminal. Vite updates the page when you save source changes. Use `npm run dev` instead of Live Server or opening `index.html` directly.
+## Where to make changes
 
-## Project structure
+- `src/games.js` holds the sample titles, prices, and descriptions. Art in `public/games` comes from the corresponding Steam product listings.
+- `src/components/GameCards.jsx` renders the cards. `src/components/GameDetails.jsx` renders the popup.
+- `src/pages/Home.jsx` holds the Home layout and filters. Add new page components in `src/pages`.
+- `src/App.jsx` holds the shared header, wishlist, and game popup. All styles are in `src/styles.css`.
 
-```text
-index.html          HTML entry point
-package.json        Dependencies and commands
-vite.config.js      Vite and React configuration
-src/
-  main.jsx          Starts React
-  App.jsx           Main page layout
-  styles.css        Shared styling
-  components/       Reusable React components
-assets/             Images and icons imported by components
-public/             Files served directly, such as a favicon
-```
+## Team handoff
 
-Empty folders contain `.gitkeep` placeholders so Git tracks them. Remove the placeholders when adding files.
-
-## Commands
-
-- `npm run dev`: Start the development server.
-- `npm run build`: Generate a production build in `dist/`.
-- `npm run preview`: Preview the production build after building.
-
-## Working on the site
-
-- Edit `src/App.jsx` and add components in `src/components/` for page content.
-- Edit `src/styles.css` for appearance and responsive layouts.
-- Use React state and event handlers for interactions.
-- Import images from `assets/`, or reference files in `public/` using paths from the site root.
-- Commit `package-lock.json` when dependencies change. Generated `node_modules/` and `dist/` files are ignored by Git.
+- Build My Group and the shared library for the group task.
+- Build On Sale and My Library, then connect them to the saved games.
+- Once the three flows work, rehearse the demo and submit the text below.
 
 ## Team contribution statement
 
 **Eli Schiffler:** I built the Home page with game filters, scrolling game rows, and reusable game cards and detail popups. I also added the game catalog and screenshots, made the GameFinder logo, and set up navigation and placeholder pages for the team to build on.
 
-See the [Home prototype pull request](https://github.com/Gamefinder-Industries/UI-UX-Design-Website/pull/2) for the implementation.
+Team TODO: add the remaining members' contributions.
+
+## Canvas submission
+
+Team TODO: copy the text below into Canvas after adding the contribution statement and rehearsing the three tasks.
+
+- Find a game for your friend group to play.
+- Find a free game that fits your mood.
+- Figure out what wishlisted games are currently having a deal, then open the chosen game's retailer page.
+
+[GitHub repository](https://github.com/Gamefinder-Industries/UI-UX-Design-Website)
