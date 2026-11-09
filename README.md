@@ -47,3 +47,9 @@ Empty folders contain `.gitkeep` placeholders so Git tracks them. Remove the pla
 - Use React state and event handlers for interactions.
 - Import images from `assets/`, or reference files in `public/` using paths from the site root.
 - Commit `package-lock.json` when dependencies change. Generated `node_modules/` and `dist/` files are ignored by Git.
+
+## Team contribution statement
+
+**Eli Schiffler:** I built the Home page with game filters, scrolling game rows, and reusable game cards and detail popups. I also added the game catalog and screenshots, made the GameFinder logo, and set up navigation and placeholder pages for the team to build on.
+
+See the [Home prototype pull request](https://github.com/Gamefinder-Industries/UI-UX-Design-Website/pull/2) for the implementation.
