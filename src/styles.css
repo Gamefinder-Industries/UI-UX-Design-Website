@@ -271,6 +271,60 @@ dialog::backdrop { background: rgb(0 0 0 / 74%); backdrop-filter: blur(3px); }
 .button { display: inline-block; text-decoration: none; background: var(--accent); color: var(--on-accent); }
 .button:hover { background: var(--accent-hover); }
 
+.group-page {
+  grid-template-columns: 220px minmax(0, 580px);
+  align-items: start;
+  gap: var(--space-4);
+}
+.group-page > .group-panel {
+  gap: 0;
+  background: var(--surface);
+  border: var(--line-width) solid var(--line);
+  border-radius: var(--card-radius);
+}
+.group-panel h2 {
+  padding: var(--space-2);
+  border-bottom: var(--line-width) solid var(--line);
+}
+.group-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: var(--space-1) var(--space-2);
+}
+.group-panel li {
+  display: grid;
+  grid-template-columns: 18px 1fr auto;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 42px;
+}
+.group-avatar {
+  width: 18px;
+  height: 18px;
+  border: 1px solid var(--muted);
+  border-radius: 50%;
+}
+.group-leader {
+  padding: 4px 10px;
+  border: var(--line-width) solid var(--line);
+  border-radius: var(--pill-radius);
+  color: var(--accent);
+}
+.group-panel button {
+  padding: 4px 10px;
+  border-radius: var(--pill-radius);
+}
+.group-panel button:disabled { cursor: default; }
+.group-panel button:disabled:hover { background: var(--surface); }
+.group-game {
+  display: grid;
+  justify-items: start;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  border-top: var(--line-width) solid var(--line);
+}
+.group-game p { color: var(--muted); }
+
 /* Show the press immediately. The click still confirms the action. */
 button:not(:disabled):active, .button:active { filter: brightness(.88); }
 
