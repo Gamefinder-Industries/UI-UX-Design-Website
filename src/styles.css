@@ -315,7 +315,21 @@ dialog::backdrop { background: rgb(0 0 0 / 74%); backdrop-filter: blur(3px); }
   border-radius: var(--pill-radius);
 }
 .group-panel button:disabled { cursor: default; }
-.group-panel button:disabled:hover { background: var(--surface); }
+
+@media (hover: hover) {
+  .group-panel button:hover {
+    background-color: var(--surface-hover);
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgb(57 255 20 / 35%);
+  }
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .group-panel button {
+    transition: background-color 150ms ease, border-color 150ms ease,
+      box-shadow 150ms ease;
+  }
+}
 .group-game {
   display: grid;
   justify-items: start;
