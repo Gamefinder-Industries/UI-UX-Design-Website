@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { games } from '../games';
+import { games, maxPrice } from '../games';
 import FilterDropdown from './FilterDropdown';
 
 const genres = [...new Set(games.map(game => game.genre))].sort();
 
 const dropdowns = [
-  { name: 'cost', label: 'Cost', options: [['', 'Any price'], ['free', 'Free'], ['paid', 'Paid']] },
-  { name: 'genre', label: 'Genre', options: [['', 'All genres'], ...genres.map(genre => [genre, genre])] },
   {
     name: 'players',
     label: 'Party size',
@@ -14,6 +12,73 @@ const dropdowns = [
   },
   { name: 'wishlist', label: 'Wishlist', options: [['', 'All games'], ['saved', 'Wishlisted only']] },
 ];
+
+function CostOptions({ freeOnly, max, onChange }) {
+  // Free only disables the price controls
+  function setMax(value) {
+    // Skip empty or NaN input, clamp the rest to the range
+    if (Number.isNaN(value)) return;
+    const clamped = Math.min(maxPrice, Math.max(0, value));
+    onChange({ freeOnly, max: clamped });
+  }
+
+  return (
+    <div className="cost-options">
+      <label className="cost-free">
+        <input
+          type="checkbox"
+          checked={freeOnly}
+          onChange={event => onChange({ freeOnly: event.target.checked, max })}
+        />
+        Free only
+      </label>
+      <label className="cost-max" htmlFor="cost-max-input">Max price</label>
+      <div className="cost-row">
+        <input
+          type="range"
+          aria-label="Maximum price"
+          min="0"
+          max={maxPrice}
+          step="1"
+          value={max}
+          disabled={freeOnly}
+          onChange={event => setMax(Number(event.target.value))}
+        />
+        <span className="cost-amount">
+          $
+          <input
+            id="cost-max-input"
+            type="number"
+            aria-label="Maximum price in dollars"
+            min="0"
+            max={maxPrice}
+            step="1"
+            value={max}
+            disabled={freeOnly}
+            onChange={event => setMax(Number(event.target.value))}
+          />
+        </span>
+      </div>
+    </div>
+  );
+}
+
+function GenreOptions({ selected, onToggle }) {
+  return (
+    <div className="genre-options" role="group" aria-label="Filter by genre">
+      {genres.map(genre => (
+        <label className="genre-option" key={genre}>
+          <input
+            type="checkbox"
+            checked={selected.includes(genre)}
+            onChange={() => onToggle(genre)}
+          />
+          {genre}
+        </label>
+      ))}
+    </div>
+  );
+}
 
 function RatingOptions({ rating, onSelect }) {
   // Hover previews a rating. Clicking applies the filter.
@@ -56,6 +121,23 @@ function RatingOptions({ rating, onSelect }) {
   );
 }
 
+// Default the slider to the full range
+function currentMax(filters) {
+  return filters.maxPrice ?? maxPrice;
+}
+
+function costLabel(filters) {
+  if (filters.freeOnly) return 'Free';
+  if (filters.maxPrice != null && filters.maxPrice < maxPrice) return `Up to $${filters.maxPrice}`;
+  return '';
+}
+
+function genreLabel(selected) {
+  if (selected.length === 0) return '';
+  if (selected.length === 1) return selected[0];
+  return `${selected.length} genres`;
+}
+
 export default function HomeFilters({ filters, onChange }) {
   const rating = filters.stars || 0;
 
@@ -63,9 +145,42 @@ export default function HomeFilters({ filters, onChange }) {
     onChange(current => ({ ...current, [name]: value }));
   }
 
+  const selectedGenres = filters.genres || [];
+
+  function setCost({ freeOnly, max }) {
+    onChange(current => ({
+      ...current,
+      freeOnly,
+      // Full range means no price limit
+      maxPrice: max >= maxPrice ? undefined : max,
+    }));
+  }
+
+  function toggleGenre(genre) {
+    onChange(current => {
+      const chosen = current.genres || [];
+      const next = chosen.includes(genre)
+        ? chosen.filter(name => name !== genre)
+        : [...chosen, genre];
+      return { ...current, genres: next };
+    });
+  }
+
   return (
     <form className="home-filters" aria-label="Filter games" onSubmit={event => event.preventDefault()}>
       <strong>Browse by:</strong>
+      <FilterDropdown label="Cost" selected={costLabel(filters)}>
+        {() => (
+          <CostOptions
+            freeOnly={filters.freeOnly || false}
+            max={currentMax(filters)}
+            onChange={setCost}
+          />
+        )}
+      </FilterDropdown>
+      <FilterDropdown label="Genre" selected={genreLabel(selectedGenres)}>
+        {() => <GenreOptions selected={selectedGenres} onToggle={toggleGenre} />}
+      </FilterDropdown>
       {dropdowns.map(({ name, label, options }) => {
         const value = filters[name] || '';
         const selected = value ? options.find(option => option[0] === value)?.[1] : '';

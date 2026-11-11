@@ -1,23 +1,13 @@
 import { useState } from 'react';
 import GameCards from '../components/GameCards';
 import HomeFilters from '../components/HomeFilters';
-import { games } from '../games';
+import { games, filterGames } from '../games';
 
 export default function Home({ savedGames, onToggle, onOpen }) {
   const [filters, setFilters] = useState({});
 
-  // Filter the catalog once so every row uses the same results.
-  const search = (filters.search || '').trim().toLowerCase();
-  const visibleGames = games.filter(game => {
-    if (!game.name.toLowerCase().includes(search)) return false;
-    if (filters.cost === 'free' && game.price !== 0) return false;
-    if (filters.cost === 'paid' && game.price === 0) return false;
-    if (filters.genre && game.genre !== filters.genre) return false;
-    if (filters.players && game.players < Number(filters.players)) return false;
-    if (filters.wishlist && !savedGames.includes(game.id)) return false;
-    if (filters.stars && game.rating < Number(filters.stars)) return false;
-    return true;
-  });
+  // Filter once so every row shares the result
+  const visibleGames = filterGames(games, filters, savedGames);
   const saleGames = visibleGames.filter(game => game.original);
   const cozyGames = visibleGames.filter(game => game.genre === 'Cozy');
 
