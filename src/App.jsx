@@ -71,7 +71,7 @@ export default function App() {
       <div hidden={page !== 'Home'}>
         <Home savedGames={savedGames} onToggle={toggleSavedGame} onOpen={setOpenGame} />
       </div>
-      {Page && <Page />}
+      {Page && <Page savedGames={savedGames} onToggle={toggleSavedGame} onOpen={setOpenGame} />}
       {openGame && (
         <GameDetails
           key={openGame.id}

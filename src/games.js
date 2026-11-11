@@ -80,3 +80,22 @@ export const games = [
 export function discount(game) {
   return game.original ? Math.round((1 - game.price / game.original) * 100) : 0;
 }
+
+// Ceiling for the cost slider
+export const maxPrice = Math.ceil(Math.max(...games.map(game => game.price)));
+
+// Filters the catalog by the filter bar selections
+export function filterGames(list, filters, savedGames) {
+  const search = (filters.search || '').trim().toLowerCase();
+
+  return list.filter(game => {
+    if (!game.name.toLowerCase().includes(search)) return false;
+    if (filters.freeOnly && game.price !== 0) return false;
+    if (filters.maxPrice != null && game.price > filters.maxPrice) return false;
+    if (filters.genres?.length && !filters.genres.includes(game.genre)) return false;
+    if (filters.players && game.players < Number(filters.players)) return false;
+    if (filters.wishlist && !savedGames.includes(game.id)) return false;
+    if (filters.stars && game.rating < Number(filters.stars)) return false;
+    return true;
+  });
+}

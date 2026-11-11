@@ -14,6 +14,25 @@ export function Price({ game }) {
   );
 }
 
+// Jagged starburst outline for the sale sticker, points alternate outer/inner radius
+const STICKER_POINTS = Array.from({ length: 24 }, (_, i) => {
+  const radius = i % 2 === 0 ? 48 : 40;
+  const angle = (Math.PI * i) / 12;
+  const x = 50 + radius * Math.cos(angle);
+  const y = 50 + radius * Math.sin(angle);
+  return `${x.toFixed(1)},${y.toFixed(1)}`;
+}).join(' ');
+
+export function DiscountSticker({ game }) {
+  return (
+    <svg className="discount" viewBox="0 0 100 100" aria-label={`${discount(game)} percent off`} role="img">
+      <polygon points={STICKER_POINTS} />
+      <text x="50" y="44">{discount(game)}%</text>
+      <text x="50" y="64">off</text>
+    </svg>
+  );
+}
+
 export function WishlistButton({ game, saved, onToggle }) {
   return (
     <button
@@ -69,7 +88,7 @@ export default function GameCards({ games, savedGames, onToggle, onOpen }) {
               onClick={() => onOpen(game)}
             >
               <img src={gameImage(game)} alt="" />
-              {game.original && <span className="discount">{discount(game)}% off</span>}
+              {game.original && <DiscountSticker game={game} />}
               <span className="card-info">
                 <strong className="game-name">{game.name}</strong>
                 <Price game={game} />

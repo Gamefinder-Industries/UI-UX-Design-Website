@@ -1,36 +1,53 @@
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function FilterDropdown({ label, selected, children }) {
+  const [open, setOpen] = useState(false);
   const dropdown = useRef(null);
 
   function close() {
-    const menu = dropdown.current;
-    // Return focus to the dropdown button before hiding its options.
-    menu.querySelector('summary').focus();
-    menu.open = false;
+    setOpen(false);
+    // Send focus back to the trigger
+    dropdown.current?.querySelector('.dropdown-trigger')?.focus();
   }
 
+  // Close on a click outside
+  useEffect(() => {
+    if (!open) return;
+
+    function onPointerDown(event) {
+      if (!dropdown.current.contains(event.target)) setOpen(false);
+    }
+
+    document.addEventListener('pointerdown', onPointerDown);
+    return () => document.removeEventListener('pointerdown', onPointerDown);
+  }, [open]);
+
   return (
-    <details
+    <div
       className="filter-dropdown"
-      name="home-filters"
       ref={dropdown}
       onBlur={event => {
-        if (!event.currentTarget.contains(event.relatedTarget)) {
-          event.currentTarget.open = false;
-        }
+        // Close when focus leaves the dropdown
+        if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
       }}
       onKeyDown={event => {
-        if (event.key === 'Escape' && dropdown.current.open) {
+        if (event.key === 'Escape' && open) {
           event.preventDefault();
           close();
         }
       }}
     >
-      <summary aria-label={selected ? `${label}: ${selected}` : label}>
+      <button
+        className="dropdown-trigger"
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={open}
+        aria-label={selected ? `${label}: ${selected}` : label}
+        onClick={() => setOpen(current => !current)}
+      >
         {selected || label}
-      </summary>
-      <div className="filter-panel">{children(close)}</div>
-    </details>
+      </button>
+      {open && <div className="filter-panel">{children(close)}</div>}
+    </div>
   );
 }
