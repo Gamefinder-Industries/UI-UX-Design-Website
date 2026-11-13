@@ -598,9 +598,10 @@ dialog::backdrop {
   }
 }
 .group-game {
-  display: grid;
-  justify-items: start;
-  gap: var(--space-1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
   padding: var(--space-2);
   border-top: var(--line-width) solid var(--line);
 }
@@ -691,4 +692,39 @@ button:not(:disabled):active,
 .group-game-actions button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+.group-chosen-game {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-2);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--card-radius);
+}
+
+.group-chosen-game img {
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.group-chosen-game-info {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.group-game-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
+  min-width: 0;
+}
+
+.group-steam-button {
+  flex-shrink: 0;
+  margin-right: var(--space-3);
 }

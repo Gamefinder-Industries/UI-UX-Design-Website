@@ -36,6 +36,8 @@ export default function Group() {
     closeModal();
   }
 
+  const chosenGame = games.find((game) => game.id === groupGame);
+
   return (
     <main className="group-page" aria-label="My Group">
       <section className="group-panel" aria-labelledby="friends-heading">
@@ -70,14 +72,37 @@ export default function Group() {
           </li>
         </ul>
         <div className="group-game">
-          <p>
-            {groupGame
-              ? `Chosen game: ${games.find((game) => game.id === groupGame)?.name}`
-              : "No game chosen."}
-          </p>
-          <button type="button" onClick={openModal}>
-            Choose a Game for This Group
-          </button>
+          <div className="group-game-left">
+            {chosenGame ? (
+              <div className="group-chosen-game">
+                <img src={gameImage(chosenGame)} alt="" />
+
+                <div className="group-chosen-game-info">
+                  <strong>{chosenGame.name}</strong>
+                  <Price game={chosenGame} />
+                  <span>{chosenGame.genre}</span>
+                  <span>☆ {chosenGame.rating.toFixed(1)}</span>
+                </div>
+              </div>
+            ) : (
+              <p>No game chosen.</p>
+            )}
+
+            <button type="button" onClick={openModal}>
+              Choose a Game for This Group
+            </button>
+          </div>
+
+          {chosenGame && (
+            <a
+              className="button group-steam-button"
+              href={`https://store.steampowered.com/app/${chosenGame.steamId}/`}
+              target="_blank"
+              rel="noreferrer"
+            >
+              View on Steam ↗
+            </a>
+          )}
         </div>
       </section>
 
