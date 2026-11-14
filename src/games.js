@@ -84,6 +84,13 @@ export const games = [
   },
 ];
 
+// Games the current placeholder user already owns
+export const ownedIds = ['hollow-knight', 'hades', 'palia', 'unpacking'];
+
+export function isOwned(game) {
+  return ownedIds.includes(game.id);
+}
+
 export function gameStoreUrl(game) {
   return game.storeUrl ?? `https://store.steampowered.com/app/${game.steamId}/`;
 }
