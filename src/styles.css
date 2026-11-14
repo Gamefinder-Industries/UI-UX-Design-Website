@@ -280,12 +280,6 @@ p { margin: 0; line-height: 1.5; }
   50% { top: 45%; }
   83% { top: 84%; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .pong-ball,
-  .pong-paddle {
-    animation: none;
-  }
-}
 .account-panel {
   width: 100%;
   max-width: 560px;
@@ -307,6 +301,14 @@ p { margin: 0; line-height: 1.5; }
   background: #000;
   border: var(--line-width) solid var(--line);
   border-radius: var(--control-radius);
+}
+
+.account-signed-in {
+  margin-top: var(--space-2);
+  font-size: 1.1rem;
+}
+.account-signed-in strong {
+  color: var(--accent);
 }
 
 .account-actions {
