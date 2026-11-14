@@ -1,16 +1,19 @@
 :root {
-  font-family: system-ui, sans-serif;
+  /* Electrolize for body, Jersey 20 for headers, Jersey 10 for title */
+  font-family: "Electrolize", system-ui, sans-serif;
+  font-size: 16px;
   color-scheme: dark;
-  color: #eef7ee;
-  background: #000;
-  --line: #369b40;
+  color: #c7e8c0;
+  background: #050a06;
+  --line: #2f7d3b;
   --line-width: 3px;
-  --surface: #0b130d;
-  --surface-hover: #142719;
-  --muted: #afc4b1;
-  --accent: #39ff14;
-  --accent-hover: #8aff70;
-  --on-accent: #051005;
+  --surface: #0a140c;
+  --surface-hover: #132619;
+  --muted: #7fa588;
+  --accent: #5fe07a;
+  --accent-hover: #8affa0;
+  --on-accent: #04170a;
+  --glow: 95 224 122;
   --control-radius: 10px;
   --card-radius: 16px;
   --dialog-radius: 22px;
@@ -21,15 +24,34 @@
   --space-4: 32px;
 }
 
-* {
-  box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 body {
   margin: 0;
   min-width: 960px;
+  background: var(--bg, #050a06);
 }
-button,
-.button {
+
+/* CRT-type styling with scanlines */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      rgb(0 0 0 / 0%) 0,
+      rgb(0 0 0 / 0%) 2px,
+      rgb(0 0 0 / 22%) 3px,
+      rgb(0 0 0 / 22%) 3px
+    ),
+    radial-gradient(
+      ellipse at center,
+      rgb(0 0 0 / 0%) 62%,
+      rgb(0 0 0 / 22%) 100%
+    );
+}
+button, .button {
   font: inherit;
   color: inherit;
   background: var(--surface);
@@ -57,40 +79,43 @@ button:hover,
   height: 88px;
   padding: 0 var(--space-4);
   border-bottom: var(--line-width) solid var(--accent);
-  background: #000;
-  box-shadow: 0 0 16px rgb(57 255 20 / 15%);
+  background: #050a06;
+  box-shadow: 0 0 16px rgb(var(--glow) / 15%);
   backdrop-filter: blur(16px);
 }
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
+  gap: var(--space-2);
   color: var(--accent);
-  font-size: 27px;
-  letter-spacing: -0.02em;
+  font-family: "Jersey 10", system-ui;
+  font-weight: 400;
+  font-size: 56px;
+  letter-spacing: .01em;
+  text-shadow: 0 0 10px rgb(var(--glow) / 55%);
 }
-.site-header nav {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.site-header .account-button {
-  margin-left: auto;
-}
+.site-header nav { display: flex; align-items: center; gap: 12px; }
+.site-header .account-button { margin-left: auto; }
 .site-header button {
   color: var(--muted);
   background: transparent;
   border: 0;
   border-radius: 0;
 }
+.site-header nav button, .site-header .account-button {
+  font-size: 20px;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
 .site-header button:hover {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 4px;
+  text-shadow: 0 0 10px rgb(var(--glow) / 50%);
 }
 .site-header button[aria-current="page"] {
   color: var(--accent);
-  font-weight: 600;
+  text-shadow: 0 0 10px rgb(var(--glow) / 55%);
 }
 
 main {
@@ -103,18 +128,17 @@ main > section {
   gap: var(--space-1);
   min-width: 0;
 }
-h1,
-h2 {
+h1, h2 {
   margin: 0;
   color: var(--accent);
-  font-size: 25px;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: "Jersey 20", system-ui, sans-serif;
+  font-size: 40px;
+  line-height: 1;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgb(var(--glow) / 45%);
 }
-p {
-  margin: 0;
-  line-height: 1.5;
-}
+p { margin: 0; line-height: 1.5; }
 
 .home-filters {
   display: flex;
@@ -486,33 +510,11 @@ p {
   height: 110px;
   object-fit: cover;
 }
-.card-info {
-  display: grid;
-  gap: var(--space-1);
-  width: 100%;
-  padding: var(--space-2);
-}
-.game-name {
-  font-size: 17px;
-  line-height: 1.2;
-}
-.price {
-  display: inline-flex;
-  gap: 8px;
-  align-items: baseline;
-}
-.price s,
-.rating {
-  color: var(--muted);
-  font-size: 14px;
-}
-.card-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-  font-size: 13px;
-}
+.card-info { display: grid; gap: var(--space-1); width: 100%; padding: var(--space-2); }
+.game-name { font-size: 18px; line-height: 1.2; }
+.price { display: inline-flex; gap: 8px; align-items: baseline; }
+.price s, .rating { color: var(--muted); font-size: 15px; }
+.card-meta { display: flex; align-items: center; justify-content: space-between; gap: 6px; font-size: 14px; }
 .discount {
   position: absolute;
   top: 9px;
@@ -558,7 +560,7 @@ dialog {
   border: var(--line-width) solid var(--accent);
   border-radius: var(--dialog-radius);
   background: var(--surface);
-  box-shadow: 0 0 24px rgb(57 255 20 / 20%);
+  box-shadow: 0 0 24px rgb(var(--glow) / 20%);
   color: inherit;
 }
 dialog::backdrop {
@@ -703,7 +705,7 @@ dialog::backdrop {
   .group-panel button:hover {
     background-color: var(--surface-hover);
     border-color: var(--accent);
-    box-shadow: 0 0 10px rgb(57 255 20 / 35%);
+    box-shadow: 0 0 10px rgb(var(--glow) / 35%);
   }
 }
 
@@ -734,6 +736,10 @@ button:not(:disabled):active,
 }
 
 @media (prefers-reduced-transparency: reduce), (prefers-contrast: more) {
+  .site-header { background: #050a06; backdrop-filter: none; }
+  dialog::backdrop { backdrop-filter: none; }
+  .carousel-arrow { background: var(--surface); backdrop-filter: none; }
+  body::before { display: none; }
   .site-header {
     background: #000;
     backdrop-filter: none;
