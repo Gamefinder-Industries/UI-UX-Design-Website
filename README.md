@@ -1,45 +1,24 @@
 # GameFinder
 
-GameFinder is a desktop React prototype. The prototype includes the Home page, reusable game cards, and the game details popup.
+Gamefinder is a game recommendation website that helps players find games based on their mood, interests, and budget. Users can browse games they already own, discover free games, view current sales, and find games that their friends also own. Users are allowed to link a Steam account so they can get personalized recommendations based on their library. They can also add friends to find a game for a group of friends they would want to play.
 
-## Run it locally
+## How to run it
 
-Use Node.js 22.12+ or 24 LTS.
+You need Node.js 22.12+ or 24 LTS. Run the following commands in the project root:
 
 ```sh
-git clone https://github.com/Gamefinder-Industries/UI-UX-Design-Website.git
-cd UI-UX-Design-Website
-npm ci
+npm install
 npm run dev
 ```
 
-Open the URL Vite prints in a desktop browser. Click a game card to see its details. The heart toggles a saved marker on Home until reload. Steam shows the retailer's current price.
-
-## Where to make changes
-
-- `src/games.js` holds the sample titles, prices, and descriptions. Art in `public/games` comes from the corresponding Steam product listings.
-- `src/components/GameCards.jsx` renders the cards. `src/components/GameDetails.jsx` renders the popup.
-- `src/pages/Home.jsx` holds the Home layout and filters. Add new page components in `src/pages`.
-- `src/App.jsx` holds the shared header, wishlist, and game popup. All styles are in `src/styles.css`.
-
-## Team handoff
-
-- Build My Group and the shared library for the group task.
-- Build On Sale and My Library, then connect them to the saved games.
-- Once the three flows work, rehearse the demo and submit the text below.
+Then open the URL Vite prints in a desktop browser to view the website.
 
 ## Team contribution statement
 
 **Eli Schiffler:** I built the Home page with game filters, scrolling game rows, and reusable game cards and detail popups. I also added the game catalog and screenshots, made the GameFinder logo, and set up navigation and placeholder pages for the team to build on.
 
-Team TODO: add the remaining members' contributions.
+**Rucha Damle:** Populated "My Components" and "On Sale" to have game cards. Added styling to make website look more like an old-school CRT screen. Added placeholder signed in user. Implemented state to the wishlist so users can save games to their wishlist locally. Added various styling QoL changes to game card and "My Group" page.
 
-## Canvas submission
+**name:** abc
 
-Team TODO: copy the text below into Canvas after adding the contribution statement and rehearsing the three tasks.
-
-- Find a game for your friend group to play.
-- Find a free game that fits your mood.
-- Figure out what wishlisted games are currently having a deal, then open the chosen game's retailer page.
-
-[GitHub repository](https://github.com/Gamefinder-Industries/UI-UX-Design-Website)
+**name:** abc
