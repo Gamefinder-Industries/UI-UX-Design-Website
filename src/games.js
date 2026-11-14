@@ -6,6 +6,13 @@ export const games = [
     description: 'Ferry spirits across the sea, build rooms on your boat, and grow food for your passengers. A second player can join locally as Daffodil the cat.',
   },
   {
+    id: 'gta-vii', name: 'Grand Theft Auto VII', genre: 'Action', players: 420,
+    price: 6.70, original: 6.90, rating: 4.9,
+    description: 'Three men. One city. When a score goes sideways, loyalty is the only thing worth more than gold.',
+    photos: ['cover', 'play', 'play-2', 'play-3', 'play-4'],
+    storeUrl: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1',
+  },
+  {
     id: 'short-hike', steamId: 1055540, name: 'A Short Hike', genre: 'Adventure', players: 1,
     price: 5.99, original: 7.99, rating: 4.7,
     description: 'Follow the trails up Hawk Peak or leave the path to fish, glide, and meet other hikers. You can explore the island at your own pace.',
@@ -76,6 +83,10 @@ export const games = [
     description: 'Team up as space miners, gather minerals, and fend off bugs as you work your way back to the drop pod.',
   },
 ];
+
+export function gameStoreUrl(game) {
+  return game.storeUrl ?? `https://store.steampowered.com/app/${game.steamId}/`;
+}
 
 export function discount(game) {
   return game.original ? Math.round((1 - game.price / game.original) * 100) : 0;
