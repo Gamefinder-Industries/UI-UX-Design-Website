@@ -2,7 +2,29 @@ import { useRef, useState } from "react";
 import { games, gameStoreUrl } from "../games";
 import { gameImage, Price } from "../components/GameCards";
 
-const allFriends = ["Ozzy", "Zachary", "Joydeep", "KeenDawg", "Rucha", "Robert"];
+const allFriends = [
+  "Brian Jones",
+  "Ozzy",
+  "Zachary",
+  "Joydeep",
+  "KeenDawg",
+  "Rucha",
+  "Robert",
+  "Kaito",
+  "UltraForge",
+  "BOT Connor",
+  "Aras",
+  "Fabian",
+  "Jackie Chan",
+  "TimesLegend",
+  "John Wick",
+  "James Bond",
+  "Daniel Craig",
+  "Adam Sandler",
+  "Gabriel Iglesias",
+  "Leon Kennedy",
+  "Sanshiro Sugata",
+];
 
 const ownedIds = ["hollow-knight", "hades", "palia", "unpacking"];
 
@@ -60,7 +82,7 @@ export default function Group() {
       <section className="group-panel" aria-labelledby="friends-heading">
         <h2 id="friends-heading">Friends (67)</h2>
         {availableFriends.length > 0 ? (
-          <ul>
+          <ul className="group-friends-list">
             {availableFriends.map((name) => (
               <li key={name}>
                 <span className="group-avatar" aria-hidden="true" />

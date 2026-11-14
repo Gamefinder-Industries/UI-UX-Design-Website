@@ -719,6 +719,11 @@ dialog::backdrop {
   margin: 0;
   padding: var(--space-1) var(--space-2);
 }
+.group-friends-list {
+  /* Keep six friend rows visible before the list starts scrolling. */
+  max-height: calc(252px + 2 * var(--space-1));
+  overflow-y: auto;
+}
 .group-panel li {
   display: grid;
   grid-template-columns: 18px 1fr auto;
