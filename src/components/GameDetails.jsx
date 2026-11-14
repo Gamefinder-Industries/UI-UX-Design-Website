@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
-import { discount } from '../games';
+import { discount, gameStoreUrl } from '../games';
 import { gameImage, Price, WishlistButton } from './GameCards';
 
-const photos = ['cover', 'play', 'play-2', 'play-3'];
+const defaultPhotos = ['cover', 'play', 'play-2', 'play-3'];
 
 export default function GameDetails({ game, saved, onToggle, onClose }) {
   const dialog = useRef(null);
   const [activePhoto, setActivePhoto] = useState(0);
+  const photos = game.photos ?? defaultPhotos;
 
   useEffect(() => {
     const element = dialog.current;
@@ -38,7 +39,7 @@ export default function GameDetails({ game, saved, onToggle, onClose }) {
             src={gameImage(game, photos[activePhoto])}
             alt={activePhoto === 0 ? `${game.name} cover art` : `${game.name} gameplay screenshot ${activePhoto}`}
           />
-          <div className="photo-thumbnails" role="group" aria-label="Game photos">
+          <div className="photo-thumbnails" role="group" aria-label="Game photos" style={{ '--photo-count': photos.length }}>
             {photos.map((photo, index) => (
               <button
                 key={photo}
@@ -61,7 +62,7 @@ export default function GameDetails({ game, saved, onToggle, onClose }) {
             {game.original && <span>{discount(game)}% off</span>}
             <WishlistButton game={game} saved={saved} onToggle={onToggle} />
           </div>
-          <a className="button" href={`https://store.steampowered.com/app/${game.steamId}/`} target="_blank" rel="noreferrer">
+          <a className="button" href={gameStoreUrl(game)} target="_blank" rel="noreferrer">
             View on Steam ↗
           </a>
         </div>
