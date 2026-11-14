@@ -13,6 +13,7 @@ export default function Group() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [groupGame, setGroupGame] = useState(null);
+  const [groupMembers, setGroupMembers] = useState(["Brian Jones"]);
 
   function openModal() {
     setSelectedGame(null);
@@ -36,6 +37,16 @@ export default function Group() {
     closeModal();
   }
 
+  function addFriend(name) {
+    setGroupMembers((current) =>
+      current.includes(name) ? current : [...current, name],
+    );
+  }
+
+  function removeFriend(name) {
+    setGroupMembers((current) => current.filter((member) => member !== name));
+  }
+
   const chosenGame = games.find((game) => game.id === groupGame);
 
   return (
@@ -47,7 +58,12 @@ export default function Group() {
             <li key={name}>
               <span className="group-avatar" aria-hidden="true" />
               <span>{name}</span>
-              <button type="button" aria-label={`Add ${name}`} disabled>
+              <button
+                type="button"
+                aria-label={`Add ${name}`}
+                onClick={() => addFriend(name)}
+                disabled={groupMembers.includes(name)}
+              >
                 +
               </button>
             </li>
@@ -63,13 +79,19 @@ export default function Group() {
             <span>Eli (You)</span>
             <span className="group-leader">Leader</span>
           </li>
-          <li>
-            <span className="group-avatar" aria-hidden="true" />
-            <span>Brian Jones</span>
-            <button type="button" aria-label="Remove Brian Jones" disabled>
-              − Remove
-            </button>
-          </li>
+          {groupMembers.map((name) => (
+            <li key={name}>
+              <span className="group-avatar" aria-hidden="true" />
+              <span>{name}</span>
+              <button
+                type="button"
+                aria-label={`Remove ${name}`}
+                onClick={() => removeFriend(name)}
+              >
+                − Remove
+              </button>
+            </li>
+          ))}
         </ul>
         <div className="group-game">
           <div className="group-game-left">
