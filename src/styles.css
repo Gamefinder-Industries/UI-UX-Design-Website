@@ -537,6 +537,21 @@ p { margin: 0; line-height: 1.5; }
   width: 52px;
   height: 52px;
 }
+.owned-badge {
+  position: absolute;
+  top: calc(110px - 36px);
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: bold;
+  color: var(--on-accent);
+  background: var(--accent);
+  border-radius: var(--pill-radius);
+  box-shadow: 0 0 10px rgb(var(--glow) / 45%);
+}
 .discount polygon {
   fill: var(--surface);
   stroke: var(--accent);

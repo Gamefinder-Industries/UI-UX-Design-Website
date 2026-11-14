@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { discount } from '../games';
+import { discount, isOwned } from '../games';
 
 export function gameImage(game, kind = 'cover') {
   return `${import.meta.env.BASE_URL}games/${game.id}-${kind}.jpg`;
@@ -89,6 +89,12 @@ export default function GameCards({ games, savedGames, onToggle, onOpen }) {
             >
               <img src={gameImage(game)} alt="" />
               {game.original && <DiscountSticker game={game} />}
+              {isOwned(game) && (
+                <span className="owned-badge" title="You own this game">
+                  <span aria-hidden="true">✓</span>
+                  <span className="owned-badge-text">Owned</span>
+                </span>
+              )}
               <span className="card-info">
                 <strong className="game-name">{game.name}</strong>
                 <Price game={game} />
