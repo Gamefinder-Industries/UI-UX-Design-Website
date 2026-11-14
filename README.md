@@ -19,6 +19,6 @@ Then open the URL Vite prints in a desktop browser to view the website.
 
 **Rucha Damle:** Populated "My Components" and "On Sale" to have game cards. Added styling to make website look more like an old-school CRT screen. Added placeholder signed in user. Implemented state to the wishlist so users can save games to their wishlist locally. Added various styling QoL changes to game card and "My Group" page.
 
-**name:** abc
+**Osbaldo Orozco:** Implemented the "My Group" feature that allows users to choose a game for their group and confirm/cancel the selection. Implemented the display of the selected game card along with a button linked to its Steam page.
 
 **name:** abc
