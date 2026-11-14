@@ -93,7 +93,7 @@ export default function GameCards({ games, savedGames, onToggle, onOpen }) {
                 <strong className="game-name">{game.name}</strong>
                 <Price game={game} />
                 <span className="card-meta">
-                  <span>{game.genre}</span>
+                  <span className="pill">{game.genre}</span>
                   <span>{game.players === 1 ? '1 player' : `Up to ${game.players} players`}</span>
                 </span>
                 <span className="rating">☆ {game.rating.toFixed(1)}</span>

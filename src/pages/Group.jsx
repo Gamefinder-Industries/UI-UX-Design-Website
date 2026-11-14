@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import { games, gameStoreUrl } from "../games";
 import { gameImage, Price } from "../components/GameCards";
 
-const friends = ["Ozzy", "Zachary", "Joydeep", "KeenDawg", "Rucha", "Robert"];
+const allFriends = ["Ozzy", "Zachary", "Joydeep", "KeenDawg", "Rucha", "Robert"];
 
 const ownedIds = ["hollow-knight", "hades", "palia", "unpacking"];
 
@@ -13,6 +13,23 @@ export default function Group() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedGame, setSelectedGame] = useState(null);
   const [groupGame, setGroupGame] = useState(null);
+  // Who is currently in the group, besides the leader. Starts with Brian Jones.
+  const [groupMembers, setGroupMembers] = useState(["Brian Jones"]);
+
+  function addToGroup(name) {
+    setGroupMembers((current) =>
+      current.includes(name) ? current : [...current, name]
+    );
+  }
+
+  function removeFromGroup(name) {
+    setGroupMembers((current) => current.filter((member) => member !== name));
+  }
+
+  // Friends list shows everyone not already in the group.
+  const availableFriends = allFriends.filter(
+    (name) => !groupMembers.includes(name)
+  );
 
   function openModal() {
     setSelectedGame(null);
@@ -42,17 +59,25 @@ export default function Group() {
     <main className="group-page" aria-label="My Group">
       <section className="group-panel" aria-labelledby="friends-heading">
         <h2 id="friends-heading">Friends (67)</h2>
-        <ul>
-          {friends.map((name) => (
-            <li key={name}>
-              <span className="group-avatar" aria-hidden="true" />
-              <span>{name}</span>
-              <button type="button" aria-label={`Add ${name}`} disabled>
-                +
-              </button>
-            </li>
-          ))}
-        </ul>
+        {availableFriends.length > 0 ? (
+          <ul>
+            {availableFriends.map((name) => (
+              <li key={name}>
+                <span className="group-avatar" aria-hidden="true" />
+                <span>{name}</span>
+                <button
+                  type="button"
+                  aria-label={`Add ${name} to group`}
+                  onClick={() => addToGroup(name)}
+                >
+                  +
+                </button>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Everyone is already in the group.</p>
+        )}
       </section>
 
       <section className="group-panel" aria-labelledby="group-heading">
@@ -63,13 +88,19 @@ export default function Group() {
             <span>Eli (You)</span>
             <span className="group-leader">Leader</span>
           </li>
-          <li>
-            <span className="group-avatar" aria-hidden="true" />
-            <span>Brian Jones</span>
-            <button type="button" aria-label="Remove Brian Jones" disabled>
-              − Remove
-            </button>
-          </li>
+          {groupMembers.map((name) => (
+            <li key={name}>
+              <span className="group-avatar" aria-hidden="true" />
+              <span>{name}</span>
+              <button
+                type="button"
+                aria-label={`Remove ${name} from group`}
+                onClick={() => removeFromGroup(name)}
+              >
+                − Remove
+              </button>
+            </li>
+          ))}
         </ul>
         <div className="group-game">
           <div className="group-game-left">
@@ -80,7 +111,7 @@ export default function Group() {
                 <div className="group-chosen-game-info">
                   <strong>{chosenGame.name}</strong>
                   <Price game={chosenGame} />
-                  <span>{chosenGame.genre}</span>
+                  <span className="pill">{chosenGame.genre}</span>
                   <span>☆ {chosenGame.rating.toFixed(1)}</span>
                 </div>
               </div>
@@ -119,7 +150,10 @@ export default function Group() {
           </button>
         </div>
 
-        <div className="group-game-options">
+        <h3 className="group-game-options-heading" id="shared-games-heading">
+          Shared Games
+        </h3>
+        <div className="group-game-options" aria-labelledby="shared-games-heading">
           {ownedGames.map((game) => (
             <button
               type="button"
@@ -132,7 +166,7 @@ export default function Group() {
               <span className="group-game-option-info">
                 <strong>{game.name}</strong>
                 <Price game={game} />
-                <span>{game.genre}</span>
+                <span className="pill">{game.genre}</span>
                 <span>☆ {game.rating.toFixed(1)}</span>
               </span>
             </button>

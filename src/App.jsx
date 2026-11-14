@@ -18,8 +18,10 @@ const navItems = ['Home', 'My Library', 'On Sale', 'My Group'];
 export default function App() {
   const [page, setPage] = useState('Home');
   const [openGame, setOpenGame] = useState(null);
-  // The cards and popup share one wishlist.
+  // The cards and popup share one wishlist. Starts empty; liking a game adds to it.
   const [savedGames, setSavedGames] = useState([]);
+  // Placeholder signed-in user for the prototype.
+  const [user, setUser] = useState('Mario');
 
   const Page = pages[page];
 
@@ -64,14 +66,23 @@ export default function App() {
           aria-current={page === 'My Account' ? 'page' : undefined}
           onClick={() => goToPage('My Account')}
         >
-          My Account
+          {user ? `Signed in as: ${user}` : 'My Account'}
         </button>
       </header>
       {/* Keep the Home filters when switching pages. */}
       <div hidden={page !== 'Home'}>
         <Home savedGames={savedGames} onToggle={toggleSavedGame} onOpen={setOpenGame} />
       </div>
-      {Page && <Page savedGames={savedGames} onToggle={toggleSavedGame} onOpen={setOpenGame} />}
+      {Page && (
+        <Page
+          savedGames={savedGames}
+          onToggle={toggleSavedGame}
+          onOpen={setOpenGame}
+          user={user}
+          onSignIn={name => setUser(name || 'Mario')}
+          onSignOut={() => setUser(null)}
+        />
+      )}
       {openGame && (
         <GameDetails
           key={openGame.id}

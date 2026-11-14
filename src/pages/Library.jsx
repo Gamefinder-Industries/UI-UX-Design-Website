@@ -3,16 +3,16 @@ import GameCards from '../components/GameCards';
 import HomeFilters from '../components/HomeFilters';
 import { games, filterGames } from '../games';
 
-// Placeholder lists until there is a real ownership model
+// Placeholder owned list until there is a real ownership model
 const ownedIds = ['hollow-knight', 'hades', 'palia', 'unpacking'];
-const likedIds = ['spiritfarer', 'celeste', 'short-hike', 'stardew'];
 
 export default function Library({ savedGames, onToggle, onOpen }) {
   const [filters, setFilters] = useState({});
 
   const byId = ids => filterGames(games.filter(game => ids.includes(game.id)), filters, savedGames);
   const ownedGames = byId(ownedIds);
-  const likedGames = byId(likedIds);
+  // The wishlist is whatever the user has hearted, in the order they saved it.
+  const wishlistGames = byId(savedGames);
 
   return (
     <main>
@@ -25,12 +25,12 @@ export default function Library({ savedGames, onToggle, onOpen }) {
           <p role="status">No owned games match these filters.</p>
         )}
       </section>
-      <section aria-labelledby="liked-heading">
-        <h2 id="liked-heading">Liked Games</h2>
-        {likedGames.length > 0 ? (
-          <GameCards games={likedGames} savedGames={savedGames} onToggle={onToggle} onOpen={onOpen} />
+      <section aria-labelledby="wishlist-heading">
+        <h2 id="wishlist-heading">Wishlist</h2>
+        {wishlistGames.length > 0 ? (
+          <GameCards games={wishlistGames} savedGames={savedGames} onToggle={onToggle} onOpen={onOpen} />
         ) : (
-          <p role="status">No liked games match these filters.</p>
+          <p role="status">Your wishlist is empty. Tap the heart on a game to add it.</p>
         )}
       </section>
     </main>
