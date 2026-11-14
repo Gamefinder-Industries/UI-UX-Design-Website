@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { games } from "../games";
+import { games, gameStoreUrl } from "../games";
 import { gameImage, Price } from "../components/GameCards";
 
 const friends = ["Ozzy", "Zachary", "Joydeep", "KeenDawg", "Rucha", "Robert"];
@@ -96,7 +96,7 @@ export default function Group() {
           {chosenGame && (
             <a
               className="button group-steam-button"
-              href={`https://store.steampowered.com/app/${chosenGame.steamId}/`}
+              href={gameStoreUrl(chosenGame)}
               target="_blank"
               rel="noreferrer"
             >
