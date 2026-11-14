@@ -21,4 +21,6 @@ Then open the URL Vite prints in a desktop browser to view the website.
 
 **Osbaldo Orozco:** Implemented the "My Group" feature that allows users to choose a game for their group and confirm/cancel the selection. Implemented the display of the selected game card along with a button linked to its Steam page.
 
+**Kaito Rushworth:** Made the REPO and added the first version of the black and green theme. Fixed an issue where the filters overlapped the navigation while scrolling, and adjusted the Cost dropdown so the price field fits inside it. Made the initial My Group layout and made the My Account sign-in screen, including its looping Pong animation. 
+
 **name:** abc
