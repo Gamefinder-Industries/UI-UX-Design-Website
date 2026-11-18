@@ -732,10 +732,33 @@ dialog::backdrop {
   min-height: 42px;
 }
 .group-avatar {
+  position: relative;
   width: 18px;
   height: 18px;
-  border: 1px solid var(--muted);
+  overflow: hidden;
+  border: 1px solid var(--accent);
   border-radius: 50%;
+  background: var(--accent);
+}
+.group-avatar::before,
+.group-avatar::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface);
+}
+.group-avatar::before {
+  top: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.group-avatar::after {
+  top: 9px;
+  width: 14px;
+  height: 10px;
+  border-radius: 50% 50% 0 0;
 }
 .group-leader {
   padding: 4px 10px;
