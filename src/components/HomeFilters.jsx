@@ -67,7 +67,16 @@ function GenreOptions({ selected, onToggle }) {
   return (
     <div className="genre-options" role="group" aria-label="Filter by genre">
       {genres.map(genre => (
-        <label className="genre-option" key={genre}>
+        <label
+          className="genre-option"
+          key={genre}
+          onPointerDown={event => {
+            // Keep the dropdown focused until the label toggles its checkbox.
+            if (event.target !== event.currentTarget.querySelector('input')) {
+              event.preventDefault();
+            }
+          }}
+        >
           <input
             type="checkbox"
             checked={selected.includes(genre)}
